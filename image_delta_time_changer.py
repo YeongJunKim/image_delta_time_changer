@@ -5,8 +5,6 @@ from datetime import datetime, timedelta
 import argparse
 import glob
 import sys
-from pathlib import Path
-from typing import List
 import piexif
 
 def delta_changer(target_file: str, d_h: int, d_m: int, d_s: int):
