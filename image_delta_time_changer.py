@@ -5,6 +5,8 @@ from datetime import datetime, timedelta
 import argparse
 import glob
 import sys
+from pathlib import Path
+from typing import List
 import piexif
 
 def delta_changer(target_file: str, d_h: int, d_m: int, d_s: int):
@@ -61,7 +63,13 @@ if __name__ == '__main__':
         sys.exit()
 
     if args.dir is not None:
-        files = glob.glob(args.dir + "*.JPG")
+        extensions = [".JPG", ".jpg", ".jpeg", ".JPEG"]
+        files = []
+        for extension in extensions:
+            rule = args.dir+"/*"+extension
+            g = glob.glob(rule)
+            files = files + g
+
         files.sort(reverse=False)
         for file in files:
             delta_changer(file, d_hour, d_minute, d_second)
